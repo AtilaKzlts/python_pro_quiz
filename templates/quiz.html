@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sınav - Python Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Python Pro Sınavı</h1>
+    <p>Toplam {{ questions|length }} soru. Her sorunun sadece 1 doğru cevabı var.</p>
+
+    <form method="POST">
+        {% for q in questions %}
+        <div class="question-box">
+            <p class="topic">{{ q.topic }}</p>
+            <p class="question-text"><strong>{{ loop.index }}.</strong> {{ q.question }}</p>
+            {% for opt in q.options %}
+            <label class="option">
+                <input type="radio" name="q{{ q.id }}" value="{{ loop.index0 }}" required>
+                {{ opt }}
+            </label>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn">Sınavı Gönder</button>
+    </form>
+</div>
+{% endblock %}

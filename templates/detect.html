@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Görsel Algılama - Python Pro{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Görsel Algılama / Sınıflandırma</h1>
+    <p>Bir resim yükle. Sistem basit renk analiziyle bir sınıf ve güven skoru üretir. Sonuç veritabanına kaydedilir.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Resim seç (png, jpg, jpeg, gif, webp)</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit" class="btn">Analiz Et</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <h3>Sonuç</h3>
+        {% if filename %}
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Yüklenen görsel" class="preview-img">
+        {% endif %}
+        <p><strong>Sınıf:</strong> {{ result }}</p>
+        <p><strong>Güven skoru:</strong> {{ confidence }}</p>
+    </div>
+    {% endif %}
+</div>
+
+{% if recent %}
+<div class="card">
+    <h2>Son Tespitler</h2>
+    <ul class="recent-list">
+        {% for r in recent %}
+        <li>
+            <strong>{{ r.result }}</strong>
+            (güven: {{ r.confidence }})
+            — {{ r.created_at.strftime('%d.%m.%Y %H:%M') }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

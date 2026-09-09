@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Ana Sayfa - Python Pro Sınav{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Merhaba! 👋</h1>
+    <p>Bu site, Python’ın farklı alanlarını (sohbet botu, web, yapay zeka, bilgisayar görüşü ve doğal dil işleme) test eden basit bir sınav platformudur.</p>
+
+    {% if username %}
+        <p>Şu an <strong>{{ username }}</strong> olarak giriş yaptın.</p>
+        <p>En yüksek puanın: <strong>{{ user_highest }}</strong> / 6</p>
+        <a href="{{ url_for('quiz') }}" class="btn">Sınava Başla / Tekrar Dene</a>
+        <a href="{{ url_for('detect') }}" class="btn btn-secondary">Görsel Algılama Sayfası</a>
+    {% else %}
+        <p>Başlamak için önce ismini girmen gerekiyor.</p>
+        <a href="{{ url_for('login') }}" class="btn">İsim Gir ve Başla</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>Sınav Konuları</h2>
+    <ul>
+        <li>Python ile sohbet botu otomasyonu (Discord.py)</li>
+        <li>Python ile web geliştirme (Flask)</li>
+        <li>Python ile yapay zeka geliştirme</li>
+        <li>Bilgisayar görüşü (Computer Vision)</li>
+        <li>Doğal Dil İşleme (NLP)</li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Sonuç - Python Pro Sınav{% endblock %}
+
+{% block content %}
+<div class="card result-card">
+    <h1>Sınav Sonucu</h1>
+    <p class="big-score">{{ score }} / {{ total }}</p>
+
+    <p>Son aldığın puan: <strong>{{ last_score }}</strong></p>
+    <p>Şimdiye kadarki en yüksek puanın: <strong>{{ user_highest }}</strong></p>
+    <p>Tüm kullanıcılar arasındaki en yüksek puan: <strong>{{ global_highest }}</strong></p>
+
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('quiz') }}" class="btn">Tekrar Dene</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Ana Sayfa</a>
+        <a href="{{ url_for('detect') }}" class="btn btn-secondary">Görsel Algılama</a>
+    </div>
+</div>
+{% endblock %}

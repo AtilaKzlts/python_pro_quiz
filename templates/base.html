@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Python Pro Sınav{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="{{ url_for('index') }}" class="logo">🐍 Python Pro Sınav</a>
+        </div>
+        <div class="header-right">
+            <div class="scores-box">
+                <span>🏆 Genel En Yüksek: <strong>{{ global_highest }}</strong></span>
+                {% if username %}
+                <span>👤 Senin En Yüksek: <strong>{{ user_highest }}</strong></span>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Ana Sayfa</a>
+        {% if username %}
+            <a href="{{ url_for('quiz') }}">Sınav</a>
+            <a href="{{ url_for('detect') }}">Görsel Algılama</a>
+            <a href="{{ url_for('about') }}">Hakkında</a>
+            <a href="{{ url_for('logout') }}">Çıkış ({{ username }})</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Giriş / İsim Gir</a>
+            <a href="{{ url_for('detect') }}">Görsel Algılama</a>
+            <a href="{{ url_for('about') }}">Hakkında</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>
+            Bu site <strong>Python Pro Eğitmen Adayı</strong> tarafından hazırlanmıştır.<br>
+            Amaç: Flask, SQLAlchemy ve temel görsel işleme ile gençlere yönelik basit bir sınav platformu sunmak.<br>
+            © 2026 · Python Pro Sınav Projesi
+        </p>
+    </footer>
+</body>
+</html>
