@@ -1,4 +1,4 @@
-# Python Pro Sınav Sitesi (Basit Versiyon)
+# Python Pro Sınav Sitesi 
 
 Flask + SQLAlchemy ile yapılmış, çocuklara / gençlere yönelik basit sınav + görsel algılama sitesi.
 
